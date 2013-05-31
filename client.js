@@ -1,5 +1,5 @@
 var arDrone = require('ar-drone');
-var client  = arDrone.createClient({ 'ip': '192.168.1.22' });
+var client  = arDrone.createClient({ 'ip': '[drone ip address]' });
 
 console.log('running...');
 
@@ -21,7 +21,7 @@ var rotate = function() {
 
 var azure = require('azure');
 
-var serviceBusService = azure.createServiceBusService('clouddrone', 'jSAMUQnfly5wl7YuWOSSribrzr2TS0OL8eFLlnhkjQE=');
+var serviceBusService = azure.createServiceBusService('[namespace]', '[key]');
 var recieveMessage = function() {
   serviceBusService.receiveQueueMessage('pilot', function(error, serverMessage){
       if(!error){
@@ -40,14 +40,14 @@ var recieveMessage = function() {
   });
 };
 
-var blobService = azure.createBlobService('clouddrone', 'S57j8EaT3L/yfDmI2jBrnTT9IDC2gOkQv+/RVOp0utKVpWNBnWaL9DbHGGP26MTlzPcC2LFaAIlDCDbByMOSwg==');
+var blobService = azure.createBlobService('[name]', '[key]');
 var saveData = function(data) {
   var t = new Date().getTime();
   if ((t % 100) == 0) {
     var name = 'data_' + t + '.json';
     console.log('saving log data ' + name);
     var json = JSON.stringify(data);
-    blobService.createBlockBlobFromText('logs2', name, json, function(error){
+    blobService.createBlockBlobFromText('logs', name, json, function(error){
         if(error){
           console.error(error);
         }

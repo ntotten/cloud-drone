@@ -31,7 +31,7 @@ app.get('/', routes.index);
 app.get('/users', user.list);
 
 var azure = require('azure');
-var serviceBusService = azure.createServiceBusService('clouddrone', 'jSAMUQnfly5wl7YuWOSSribrzr2TS0OL8eFLlnhkjQE=');
+var serviceBusService = azure.createServiceBusService('[namespace]', '[key]');
 var sendCommand = function(command, callback) {
     serviceBusService.sendQueueMessage('pilot', command, function(error) {
       if(!error){
