@@ -1,0 +1,4 @@
+1) Connect to AR Drone's Wireless
+2) telnet 192.168.1.1
+3) killall udhcpd; iwconfig ath0 mode managed essid dronedemo; ifconfig ath0 [ip] netmask [subnet] up;
+4) Connect to router wifi
